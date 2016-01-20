@@ -6,7 +6,10 @@ Github: kuanyui/takahashi.js
  */
 
 onload = function() {
-    
+    function p(x, prompt){
+        prompt = prompt === undefined ? "Prompt:\n" : prompt;
+        alert(prompt + JSON.stringify(x));
+    }
     //======================================================
     // Attributions
     //======================================================
@@ -42,15 +45,18 @@ onload = function() {
     };
 
     Parser.prototype.parse = function(){
-        var lines = this.readLines();
-        this.parsed = this.__parse(lines);
-        return this.parsed;
+        var shit = this;
+        var lines = shit.readLines();
+        shit.parsed = shit.__parse(lines);
+        return shit.parsed;
     };
 
     Parser.prototype.__parse = function(lines, parsed){
         parsed = parsed || [];
         var imagePattern = /^!\[\]\((.+)\)$/;
-        if (lines === []) {
+        p(lines, "******lines:\n ");
+        p(parsed, "*******parsed\n");
+        if (lines == []) {
             return parsed;
         } else if (lines[0].substring(0, 6) == "# ![](" || lines[0].substring(0, 4) == "![](") { // Image
             var url = lines[0].match(imagePattern)[1];
@@ -101,6 +107,8 @@ onload = function() {
     
     var parser = new Parser(markdownFile);
 
-    alert(JSON.stringify(parser.parse()));
+    p(parser.parse());
 
 };
+
+
