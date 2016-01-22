@@ -6,9 +6,8 @@ Github: kuanyui/takahashi.js
  */
 
 onload = function() {
-    function p(x, prompt){
-        prompt = prompt === undefined ? "Prompt:\n" : prompt;
-        alert(prompt + JSON.stringify(x));
+    function p(x){
+        alert(JSON.stringify(x));
     }
     //======================================================
     // Attributions
@@ -23,7 +22,7 @@ onload = function() {
     
     function Parser(markdownFileUrl) {
         this.markdownFileUrl = markdownFileUrl;
-        this.parsed = [];
+        this.parsed = "hello";
     };
 
     Parser.prototype.getMarkdownFileContentAsString = function () {
@@ -47,18 +46,24 @@ onload = function() {
     Parser.prototype.parse = function(){
         var shit = this;
         var lines = shit.readLines();
-        shit.parsed = shit.__parse(lines);
+        shit.__parse(lines);
         return shit.parsed;
     };
 
     Parser.prototype.__parse = function(lines, parsed){
         parsed = parsed || [];
+        var shit=this;
         var imagePattern = /^!\[\]\((.+)\)$/;
-        p(lines, "******lines:\n ");
-        p(parsed, "*******parsed\n");
-        if (lines == []) {
+        
+        // alert("******LINES:\n" + JSON.stringify(lines) +
+        //       "\nlines.length = " + lines.length +
+        //       "\n\n******PARSED:\n" + JSON.stringify(parsed));
+        if (lines.length == 0) {
+            shit.parsed = parsed;
             return parsed;
-        } else if (lines[0].substring(0, 6) == "# ![](" || lines[0].substring(0, 4) == "![](") { // Image
+        } else if (lines[0] == ""){
+            this.__parse(lines.slice(1), parsed);
+        } else if (lines[0].substring(0, 6) == "# ![](" || lines[0].substring(0, 4) == "![](") {
             var url = lines[0].match(imagePattern)[1];
             parsed.push({"type": "image", "path": url});
             this.__parse(lines.slice(1), parsed);
@@ -74,6 +79,8 @@ onload = function() {
             var language = lines[0].substring(3);
             var r = this.processCodeBlock(lines.slice(1));
             this.__parse(r['lines'], r['code']);
+        } else {
+            this.__parse(lines.slice(1), parsed);
         };
     };
 
@@ -106,8 +113,8 @@ onload = function() {
     //======================================================
     
     var parser = new Parser(markdownFile);
-
-    p(parser.parse());
+    parser.parse();
+    p(parser.parsed);
 
 };
 
