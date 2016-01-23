@@ -55,49 +55,46 @@ onload = function() {
         var shit=this;
         var imagePattern = /!\[\]\((.+)\)/;
         
-        // alert("******LINES:\n" + JSON.stringify(lines) +
-        //       "\nlines.length = " + lines.length +
-        //       "\n\n******PARSED:\n" + JSON.stringify(parsed));
+         // alert("******LINES:\n" + JSON.stringify(lines) +
+         //       "\nlines.length = " + lines.length +
+         //       "\n\n******PARSED:\n" + JSON.stringify(parsed));
         if (lines.length == 0) {
             shit.parsed = parsed;
             return parsed;
         } else if (lines[0] == ""){
-            this.__parse(lines.slice(1), parsed);
+            return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 6) == "# ![](") {
             var url = lines[0].match(imagePattern)[1];
             parsed.push({"type": "image", "path": url});
-            this.__parse(lines.slice(1), parsed);
+            return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 4) == "![](") {
             var url = lines[0].match(imagePattern)[1];
             parsed[(parsed.length - 1)]['type'] = "title+image";
             parsed[(parsed.length - 1)]['url'] = url;
-            this.__parse(lines.slice(1), parsed);            
+            return this.__parse(lines.slice(1), parsed);            
         } else if (lines[0].substring(0, 2) == "# ") { // Title
             var title = this.processEmphasisMarks(lines[0].substring(2));
-            p(parsed);
             parsed.push({"type": "normal", "title": title});
-            this.__parse(lines.slice(1), parsed);
+            return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 2) == "- ") { // Subtitle
             var subtitle = this.processEmphasisMarks(lines[0].substring(2));
             parsed[(parsed.length - 1)]['subtitle'] = subtitle;
-            this.__parse(lines.slice(1), parsed);
+            return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 3) == "```") {
             var language = lines[0].substring(3);
-            var r = this.processCodeBlock(lines.slice(1));
-            this.__parse(r['lines'], r['code']);
+            parsed.push({"type": "codeblock", "language": language, "code": ""});
+            return this.processCodeBlock(lines.slice(1), parsed);
         } else {
-            this.__parse(lines.slice(1), parsed);
+            return this.__parse(lines.slice(1), parsed);
         };
     };
 
-    Parser.prototype.processCodeBlock = function(lines, outputStr){
-        outputStr = outputStr || "";
+    Parser.prototype.processCodeBlock = function(lines, parsed){
         if (lines[0].substring(0,3) == "```"){
-            console.log({"lines": lines.slice(1), "code": outputStr});
-            return {"lines": lines.slice(1), "code": outputStr};
+            return this.__parse(lines.slice(1), parsed);
         } else {
-            outputStr = outputStr.concat(lines[0], "\n");
-            return this.processCodeBlock(lines.slice(1), outputStr);
+            parsed[(parsed.length - 1)]['code'] += lines[0] + "\n";
+            return this.processCodeBlock(lines.slice(1), parsed);
         };
     };
     
