@@ -7,14 +7,14 @@ Github: kuanyui/takahashi.js
 
 onload = function() {
     function p(x){
-        alert(JSON.stringify(x));
+        alert("p() -> " + JSON.stringify(x));
     }
     //======================================================
     // Attributions
     //======================================================
     
     var body = document.body;
-    var markdownFile = 'test.md';
+    var markdownFile = 'source.md';
     
     //======================================================
     // Parser
@@ -53,7 +53,7 @@ onload = function() {
     Parser.prototype.__parse = function(lines, parsed){
         parsed = parsed || [];
         var shit=this;
-        var imagePattern = /^!\[\]\((.+)\)$/;
+        var imagePattern = /!\[\]\((.+)\)/;
         
         // alert("******LINES:\n" + JSON.stringify(lines) +
         //       "\nlines.length = " + lines.length +
@@ -63,12 +63,18 @@ onload = function() {
             return parsed;
         } else if (lines[0] == ""){
             this.__parse(lines.slice(1), parsed);
-        } else if (lines[0].substring(0, 6) == "# ![](" || lines[0].substring(0, 4) == "![](") {
+        } else if (lines[0].substring(0, 6) == "# ![](") {
             var url = lines[0].match(imagePattern)[1];
             parsed.push({"type": "image", "path": url});
             this.__parse(lines.slice(1), parsed);
+        } else if (lines[0].substring(0, 4) == "![](") {
+            var url = lines[0].match(imagePattern)[1];
+            parsed[(parsed.length - 1)]['type'] = "title+image";
+            parsed[(parsed.length - 1)]['url'] = url;
+            this.__parse(lines.slice(1), parsed);            
         } else if (lines[0].substring(0, 2) == "# ") { // Title
             var title = this.processEmphasisMarks(lines[0].substring(2));
+            p(parsed);
             parsed.push({"type": "normal", "title": title});
             this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 2) == "- ") { // Subtitle
@@ -87,10 +93,11 @@ onload = function() {
     Parser.prototype.processCodeBlock = function(lines, outputStr){
         outputStr = outputStr || "";
         if (lines[0].substring(0,3) == "```"){
+            console.log({"lines": lines.slice(1), "code": outputStr});
             return {"lines": lines.slice(1), "code": outputStr};
         } else {
             outputStr = outputStr.concat(lines[0], "\n");
-            this.processCodeBlock(lines.slice(1), outputStr);
+            return this.processCodeBlock(lines.slice(1), outputStr);
         };
     };
     
@@ -114,7 +121,7 @@ onload = function() {
     
     var parser = new Parser(markdownFile);
     parser.parse();
-    p(parser.parsed);
+    //p(parser.parsed);
 
 };
 
