@@ -110,13 +110,16 @@ onload = function() {
     //======================================================
     // Slide
     //======================================================
-
+    // Variable with prefix '$' is a DOM element.
+    
     var $slides = document.getElementsByTagName("slides")[0];
     var parser = new Parser(markdownFile);
     var slidesData = parser.parsed;
-    p(slidesData);
-    for (var i = 1; i <= slidesData.length; i++){
-        $slides.appendChild(document.createElement("slide"));
+    for (var i = 0; i < slidesData.length; i++){
+        var slide = slidesData[i];
+        var $slide = document.createElement("slide");
+        $slide.id = i;
+        $slides.appendChild($slide);
     }
 
     
