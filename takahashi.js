@@ -46,20 +46,15 @@ onload = function() {
     Parser.prototype.parse = function(){
         var shit = this;
         var lines = shit.readLines();
-        shit.__parse(lines);
+        shit.parsed = shit.__parse(lines);
         return shit.parsed;
     };
 
     Parser.prototype.__parse = function(lines, parsed){
         parsed = parsed || [];
-        var shit=this;
         var imagePattern = /!\[\]\((.+)\)/;
         
-         // alert("******LINES:\n" + JSON.stringify(lines) +
-         //       "\nlines.length = " + lines.length +
-         //       "\n\n******PARSED:\n" + JSON.stringify(parsed));
         if (lines.length == 0) {
-            shit.parsed = parsed;
             return parsed;
         } else if (lines[0] == ""){
             return this.__parse(lines.slice(1), parsed);
@@ -91,6 +86,9 @@ onload = function() {
 
     Parser.prototype.processCodeBlock = function(lines, parsed){
         if (lines[0].substring(0,3) == "```"){
+            // remove \n at the last line.
+            var code = parsed[(parsed.length - 1)]['code'];
+            parsed[(parsed.length - 1)]['code'] = code.substring(0, code.length-1);
             return this.__parse(lines.slice(1), parsed);
         } else {
             parsed[(parsed.length - 1)]['code'] += lines[0] + "\n";
@@ -98,27 +96,22 @@ onload = function() {
         };
     };
     
-    //Parser.prototype.processTitle = function(lines, parsed){};
-    //Parser.prototype.processSubtitle = function(lines, parsed){};
-    //Parser.prototype.processImage = function(lines, parsed){};
-    
     Parser.prototype.processEmphasisMarks = function(string) {
         var italic = /\*(.+?)\*/g;
         var bold   = /\*\*(.+?)\*\*/g;
         var strike = /\+(.+?)\+/g;
-        var newline = "/\\\\/g";
+        var newline = /\\\\/g;
         var output = string.replace(bold, "<b>$1</b>");
         output = output.replace(italic, "<i>$1</i>");
         output = output.replace(strike, "<s>$1</s>");
-        return output.replace(newline, "<s>$1</s>");
+        return output.replace(newline, "\n");
     };
     //======================================================
     // Run
     //======================================================
     
     var parser = new Parser(markdownFile);
-    parser.parse();
-    //p(parser.parsed);
+    p(parser.parse());
 
 };
 
