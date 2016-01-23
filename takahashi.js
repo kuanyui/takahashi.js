@@ -10,10 +10,9 @@ onload = function() {
         alert("p() -> " + JSON.stringify(x));
     }
     //======================================================
-    // Attributions
+    // Variables
     //======================================================
     
-    var body = document.body;
     var markdownFile = 'source.md';
     
     //======================================================
@@ -22,7 +21,7 @@ onload = function() {
     
     function Parser(markdownFileUrl) {
         this.markdownFileUrl = markdownFileUrl;
-        this.parsed = "hello";
+        this.parsed = this.parse(markdownFileUrl);
     };
 
     Parser.prototype.getMarkdownFileContentAsString = function () {
@@ -106,12 +105,23 @@ onload = function() {
         output = output.replace(strike, "<s>$1</s>");
         return output.replace(newline, "\n");
     };
-    //======================================================
-    // Run
-    //======================================================
+
     
+    //======================================================
+    // Slide
+    //======================================================
+
+    var $slides = document.getElementsByTagName("slides")[0];
     var parser = new Parser(markdownFile);
-    p(parser.parse());
+    var slidesData = parser.parsed;
+    p(slidesData);
+    for (var i = 1; i <= slidesData.length; i++){
+        $slides.appendChild(document.createElement("slide"));
+    }
+
+    
+    
+    
 
 };
 
