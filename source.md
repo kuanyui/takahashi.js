@@ -9,18 +9,22 @@
 # 高效
 - Efficient to write
 # 震撼
-- Shock
+- Shock to audiences
 # 好東西
-- Good
-# 讚
+- Good!
+# 寶傑我跟你說
+# 高橋的簡報...
+# 讚!
 - Awesome
 # 所以
 - So
 # takanashi.js
 - +Everybody loves JS+
 # 用 Markdown\\以*最高速率*做簡報
-# 可以用**圖片**
+# 可以用\\**全螢幕圖片**
 # ![](/images/unit_tests_paseed.jpg)
+# 也可以有**文字**跟**圖片**
+![](/images/unit_tests_paseed.jpg)
 # 或者插入 code
 ```lisp
 (hello)

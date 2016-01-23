@@ -58,13 +58,13 @@ onload = function() {
         } else if (lines[0] == ""){
             return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 6) == "# ![](") {
-            var url = lines[0].match(imagePattern)[1];
-            parsed.push({"type": "image", "path": url});
+            var imgUrl = lines[0].match(imagePattern)[1];
+            parsed.push({"type": "fullscreen-image", "path": imgUrl});
             return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 4) == "![](") {
-            var url = lines[0].match(imagePattern)[1];
-            parsed[(parsed.length - 1)]['type'] = "title+image";
-            parsed[(parsed.length - 1)]['url'] = url;
+            var imgUrl = lines[0].match(imagePattern)[1];
+            parsed[(parsed.length - 1)]['type'] = "title-and-image";
+            parsed[(parsed.length - 1)]['imgUrl'] = imgUrl;
             return this.__parse(lines.slice(1), parsed);            
         } else if (lines[0].substring(0, 2) == "# ") { // Title
             var title = this.processEmphasisMarks(lines[0].substring(2));
@@ -116,9 +116,21 @@ onload = function() {
     var parser = new Parser(markdownFile);
     var slidesData = parser.parsed;
     for (var i = 0; i < slidesData.length; i++){
-        var slide = slidesData[i];
+        var slideData = slidesData[i];
         var $slide = document.createElement("slide");
         $slide.id = i;
+        $slide.className = slideData.type;
+        if (slideData.title){
+            $slide.innerHTML += "<h2>" + slideData.title + "</h2>";};
+        if (slideData.subtitle){
+            $slide.innerHTML += "<subtitle>" + slideData.subtitle + "</subtitle>";};
+        if (slideData.type=="fullscreen-image"){
+            $slide.innerHTML += "<img src='" + slideData.imgUrl + "'></img>";};
+        if (slideData.type=="codeblock"){
+            $slide.innerHTML += "<pre><code class='" + slideData.language + "'>" +
+                slideData.code + "</code></pre>";};
+
+        
         $slides.appendChild($slide);
     }
 
