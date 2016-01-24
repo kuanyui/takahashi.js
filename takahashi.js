@@ -118,23 +118,36 @@ onload = function() {
     for (var i = 0; i < slidesData.length; i++){
         var slideData = slidesData[i];
         var $slide = document.createElement("slide");
-        $slide.id = i;
+        $slide.id = "page" + i;
         $slide.className = slideData.type;
-        if (slideData.title){
-            $slide.innerHTML += "<h2>" + slideData.title + "</h2>";};
         if (slideData.subtitle){
-            $slide.innerHTML += "<subtitle>" + slideData.subtitle + "</subtitle>";};
+            $slide.innerHTML += "<h2>" + slideData.subtitle + "</h2>";};
+        if (slideData.title){
+            $slide.innerHTML += "<h1>" + slideData.title + "</h1>";};
         if (slideData.type=="fullscreen-image"){
             $slide.innerHTML += "<img src='" + slideData.imgUrl + "'></img>";};
         if (slideData.type=="codeblock"){
             $slide.innerHTML += "<pre><code class='" + slideData.language + "'>" +
                 slideData.code + "</code></pre>";};
-
-        
+        var $h1 = $slide.getElementsByTagName("h1")[0];
+        if ($h1) {fit($h1);}
         $slides.appendChild($slide);
     }
 
+    function getMaxLineLength(string){
+        var lines = string.split("\n");
+        return Math.max.apply({}, lines.map(function(x){return x.length;}));
+    }
     
+    function fit($ele){
+        var style = $ele.style;
+        var top;
+        var left;
+        var maxLength = getMaxLineLength($ele.textContent);
+        style.display = "block";
+        style.fontSize = window.innerWidth / getMaxLineLength($ele.textContent) + "px";
+        
+    }
     
     
 
