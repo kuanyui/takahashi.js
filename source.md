@@ -3,7 +3,9 @@
 # 發明者
 # 日本 Ruby 開發者\\高橋征義
 # 有些人說\\這是偷懶
-- "You're too lazy!"
+- Somebody says "You're too lazy!"
+# 然而我認為高橋流簡報
+- But I think **takahashi method** is
 # 簡單
 - Easy to make
 # 高效
@@ -12,15 +14,25 @@
 - Shock to audiences
 # 好東西
 - Good!
-# 寶傑我跟你說
+# 寶傑我跟你說...
 # 高橋的簡報...
 # 讚!
+# 地球只有一個
+# 可是高橋的簡報
+# 卻可以一小時寫出好幾個
+# 簡報也是有很多種
+# 有的枯燥到讓你想睡覺
+# 有的字又小又多\\搞到你完全不想看
+# 重點是\\當有各種簡報讓你選擇時
+# 高橋，我選擇你的簡報
+# 高橋流的簡報
+# 讚！
 - Awesome
 # 所以
 - So
-# takanashi.js
+# takahashi.js
 - +Everybody loves JS+
-# 用 Markdown\\以*最高速率*做簡報
+# 用 Markdown\\以**最高速率**做簡報
 # 可以用\\**全螢幕圖片**
 # ![](/images/unit_tests_paseed.jpg)
 # 也可以有**文字**跟**圖片**
@@ -42,6 +54,6 @@ var shit = this;
 # 哪裡取得
 - Where to get
 # GitHub
-# kuanyui/takanashi.js
+# kuanyui/takahashi.js
 # 謝謝\\大家
 - Thank you

@@ -103,7 +103,7 @@ onload = function() {
         var output = string.replace(bold, "<b>$1</b>");
         output = output.replace(italic, "<i>$1</i>");
         output = output.replace(strike, "<s>$1</s>");
-        return output.replace(newline, "\n");
+        return output.replace(newline, "<br/>");
     };
 
     
@@ -135,7 +135,7 @@ onload = function() {
     }
 
     function getMaxLineLength(string){
-        var lines = string.split("\n");
+        var lines = string.split("<br>");
         return Math.max.apply({}, lines.map(function(x){return x.length;}));
     }
     
@@ -143,10 +143,9 @@ onload = function() {
         var style = $ele.style;
         var top;
         var left;
-        var maxLength = getMaxLineLength($ele.textContent);
         style.display = "block";
-        style.fontSize = window.innerWidth / getMaxLineLength($ele.textContent) + "px";
-        
+        style.fontSize = ((window.innerWidth / getMaxLineLength($ele.innerHTML)) * 0.7) + "px";
+        style.margin = "0px";
     }
     
     
