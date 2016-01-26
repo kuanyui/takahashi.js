@@ -34,9 +34,9 @@
 - +Everybody loves JS+
 # 用 Markdown\\以**最高速率**做簡報
 # 可以用\\**全螢幕圖片**
-# ![](/images/unit_tests_paseed.jpg)
+# ![](images/duck.jpg)
 # 也可以有**文字**跟**圖片**
-![](/images/unit_tests_paseed.jpg)
+![](images/duck.jpg.jpg)
 # 或者插入 code
 ```lisp
 (hello)

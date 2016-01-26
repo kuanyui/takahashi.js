@@ -51,7 +51,7 @@ onload = function() {
 
     Parser.prototype.__parse = function(lines, parsed){
         parsed = parsed || [];
-        var imagePattern = /!\[\]\((.+)\)/;
+        var imagePattern = /!\[\]\((.+?)\)/;
         
         if (lines.length == 0) {
             return parsed;
@@ -59,7 +59,7 @@ onload = function() {
             return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 6) == "# ![](") {
             var imgUrl = lines[0].match(imagePattern)[1];
-            parsed.push({"type": "fullscreen-image", "path": imgUrl});
+            parsed.push({"type": "fullscreen-image", "imgUrl": imgUrl});
             return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 4) == "![](") {
             var imgUrl = lines[0].match(imagePattern)[1];
@@ -130,7 +130,7 @@ onload = function() {
             if (slideData.title){
                 $slide.innerHTML += "<h1>" + slideData.title + "</h1>";};
             if (slideData.type=="fullscreen-image"){
-                $slide.innerHTML += "<img src='" + slideData.imgUrl + "'></img>";};
+                $slide.innerHTML += "<img class='fullscreen-image' src='" + slideData.imgUrl + "'></img>";};
             if (slideData.type=="codeblock"){
                 $slide.innerHTML += "<pre><code class='" + slideData.language + "'>" +
                     slideData.code + "</code></pre>";};
