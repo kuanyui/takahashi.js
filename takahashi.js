@@ -165,8 +165,8 @@ onload = function() {
     
     function fitSlide($slide){
         var style = $slide.style;
-        style.height = window.innerHeight + "px";
-        style.width = window.innerWidth + "px";
+        style.height = document.body.clientHeight + "px";
+        style.width  = document.body.clientWidth + "px";
         style.display = "none";
     }
     
