@@ -165,22 +165,28 @@ onload = function() {
     
     function fitSlide($slide){
         var style = $slide.style;
-        style.display = "none";
         style.height = window.innerHeight + "px";
         style.width = window.innerWidth + "px";
+        style.display = "none";
     }
     
     function fitH1($ele){
         var style = $ele.style;
         var top;
         var left;
+        var size = ((window.innerWidth / getMaxLineLength($ele.innerHTML)) * 0.8);
         style.position = "absolute";
         style.display = "block";
-        style.fontSize = ((window.innerWidth / getMaxLineLength($ele.innerHTML)) * 0.7) + "px";
+        style.fontSize = size + "px";
         style.left = "50%";
-        style.top = "50%";
+        style.top = "55%";
         style.transform = "translate(-50%, -50%)";
         style.margin = "0px";
+        // Shit not work:
+        while ($ele.offsetHeight > window.innerHeight){
+            size = size * 0.95 ;
+            style.fontSize = size + "px";
+        }
     }
     
     //======================================================
