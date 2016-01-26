@@ -1,8 +1,8 @@
 /* 
-takahashi.js
-Created: [2016-01-20 水 19:46]
-Author: ono hiroko
-Github: kuanyui/takahashi.js
+ takahashi.js
+ Created: [2016-01-20 水 19:46]
+ Author: ono hiroko
+ Github: kuanyui/takahashi.js
  */
 
 onload = function() {
@@ -111,44 +111,90 @@ onload = function() {
     // Slide
     //======================================================
     // Variable with prefix '$' is a DOM element.
+
+    var availablePageNumbers = [];
+    var currentPageNumber = 0;
     
-    var $slides = document.getElementsByTagName("slides")[0];
-    var parser = new Parser(markdownFile);
-    var slidesData = parser.parsed;
-    for (var i = 0; i < slidesData.length; i++){
-        var slideData = slidesData[i];
-        var $slide = document.createElement("slide");
-        $slide.id = "page" + i;
-        $slide.className = slideData.type;
-        if (slideData.subtitle){
-            $slide.innerHTML += "<h2>" + slideData.subtitle + "</h2>";};
-        if (slideData.title){
-            $slide.innerHTML += "<h1>" + slideData.title + "</h1>";};
-        if (slideData.type=="fullscreen-image"){
-            $slide.innerHTML += "<img src='" + slideData.imgUrl + "'></img>";};
-        if (slideData.type=="codeblock"){
-            $slide.innerHTML += "<pre><code class='" + slideData.language + "'>" +
-                slideData.code + "</code></pre>";};
-        var $h1 = $slide.getElementsByTagName("h1")[0];
-        if ($h1) {fit($h1);}
-        $slides.appendChild($slide);
+    function generateSlides() {
+        var $slides = document.getElementsByTagName("slides")[0];
+        var parser = new Parser(markdownFile);
+        var slidesData = parser.parsed;
+        for (var i = 0; i < slidesData.length; i++){
+            availablePageNumbers.push(i);
+            var slideData = slidesData[i];
+            var $slide = document.createElement("slide");
+            $slide.id = i;
+            $slide.className = slideData.type;
+            if (slideData.subtitle){
+                $slide.innerHTML += "<h2>" + slideData.subtitle + "</h2>";};
+            if (slideData.title){
+                $slide.innerHTML += "<h1>" + slideData.title + "</h1>";};
+            if (slideData.type=="fullscreen-image"){
+                $slide.innerHTML += "<img src='" + slideData.imgUrl + "'></img>";};
+            if (slideData.type=="codeblock"){
+                $slide.innerHTML += "<pre><code class='" + slideData.language + "'>" +
+                    slideData.code + "</code></pre>";};
+            var $h1 = $slide.getElementsByTagName("h1")[0];
+            if ($h1) {fitH1($h1);}
+            var $h2 = $slide.getElementsByTagName("h2")[0];
+            if ($h2) {$h2.style.fontSize = "4em";};
+            $slides.appendChild($slide);
+            fitSlide($slide);
+        }
     }
 
+    function show(from, to){
+        // FROM page N TO page N
+        document.getElementById(from).style.display = "none";
+        document.getElementById(to).style.display = "block";
+        currentPageNumber = to;
+        location.hash = to;
+    }
+    
     function getMaxLineLength(string){
         var lines = string.split("<br>");
         return Math.max.apply({}, lines.map(function(x){return x.length;}));
     }
     
-    function fit($ele){
+    document.onkeydown = function(e) {
+        var to = currentPageNumber + {39: 1, 37: -1}[e.which];
+        if (to in availablePageNumbers) {
+            show(currentPageNumber, to);
+        }
+    };
+    
+    function fitSlide($slide){
+        var style = $slide.style;
+        style.display = "none";
+        style.height = window.innerHeight + "px";
+        style.width = window.innerWidth + "px";
+    }
+    
+    function fitH1($ele){
         var style = $ele.style;
         var top;
         var left;
+        style.position = "absolute";
         style.display = "block";
         style.fontSize = ((window.innerWidth / getMaxLineLength($ele.innerHTML)) * 0.7) + "px";
+        style.left = "50%";
+        style.top = "50%";
+        style.transform = "translate(-50%, -50%)";
         style.margin = "0px";
     }
     
+    //======================================================
+    // Main
+    //======================================================
     
+    generateSlides();
+    if (location.hash != "") {
+        currentPageNumber = parseInt(location.hash.substring(1));
+    } else {
+        currentPageNumber = 0;
+    };
+    
+    show(0, currentPageNumber);
 
 };
 
