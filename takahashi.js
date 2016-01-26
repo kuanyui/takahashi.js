@@ -151,8 +151,8 @@ onload = function() {
         location.hash = to;
     }
     
-    function getMaxLineLength(string){
-        var lines = string.split("<br>");
+    function getMaxLineLength(HTMLString){
+        var lines = HTMLString.split("<br>");
         return Math.max.apply({},
                               lines.map(
                                   function(x){
