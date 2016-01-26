@@ -33,17 +33,25 @@
 # takahashi.js
 - +Everybody loves JS+
 # 用 Markdown\\以**最高速率**做簡報
+# 以**純 JS**實現
+# **不**綁任何編輯器
+# **不**綁任何平台
+# **不**含類固醇
+# **不**傷肝
+# **不**傷身
+# 只要有瀏覽器就可以用
+# **讚**
 # 可以用\\**全螢幕圖片**
 # ![](images/duck.jpg)
 # 也可以有**文字**跟**圖片**
 ![](images/duck.jpg.jpg)
 # 或者插入 code
+# 用最有震撼力的方式\\展示你的 code
+- Show your code in the most shocking way
 ```lisp
 (hello)
 (message "高橋流好棒棒")
 ```
-# 用最有震撼力的方式\\展示你的 code
-- Show your code in the most shocking way
 # 也適合拿來酸\\你討厭的程式語言
 - Also suitable for blame a terrible language you hate
 ```js
