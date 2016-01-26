@@ -153,7 +153,11 @@ onload = function() {
     
     function getMaxLineLength(string){
         var lines = string.split("<br>");
-        return Math.max.apply({}, lines.map(function(x){return x.length;}));
+        return Math.max.apply({},
+                              lines.map(
+                                  function(x){
+                                      var text = x.replace(/<.+?>/g, "");
+                                      return text.length;}));
     }
     
     document.onkeydown = function(e) {
