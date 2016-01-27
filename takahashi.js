@@ -153,7 +153,7 @@ onload = function() {
         location.hash = to;
     }
     
-    function getMaxLineLength(HTMLString){
+    function getHtmlStringMaxLineLength(HTMLString){
         var lines = HTMLString.split("<br>");
         return Math.max.apply({},
                               lines.map(
@@ -182,7 +182,7 @@ onload = function() {
         var style = $ele.style;
         var top;
         var left;
-        var size = ((window.innerWidth / getMaxLineLength($ele.innerHTML)) * 0.8);
+        var size = ((window.innerWidth / getHtmlStringMaxLineLength($ele.innerHTML)) * 0.8);
         style.position = "absolute";
         style.display = "block";
         style.fontSize = size + "px";
@@ -240,6 +240,13 @@ onload = function() {
     // Main
     //======================================================
 
+    function getTextMaxLineLength (text) {
+        var lines = text.split("\n");
+        return Math.max.apply({},
+                       lines.map(
+                           function(x){return text.length;}));
+    }
+    
     function main(){
         generateSlides();
         if (location.hash != "") {
@@ -252,7 +259,12 @@ onload = function() {
         resizeAllImages();
         var codeblocks = document.getElementsByTagName("pre");
         for (var i=0; i<codeblocks.length; i++) {
-            hljs.highlightBlock(codeblocks[i]);
+            var block = codeblocks[i];
+            var size = ((window.innerWidth / getTextMaxLineLength(block.textContent)) * 1.8);
+            block.style.fontSize = size + "px";
+            block.style.top = "0px";
+            block.style.bottom = "0px";
+            hljs.highlightBlock(block);
         }
     }
 
