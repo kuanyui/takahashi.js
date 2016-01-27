@@ -46,7 +46,8 @@
 # 可以用\\**全螢幕圖片**
 # ![](images/duck.jpg)
 # 也可以有**文字**跟**圖片**
-![](images/duck.jpg.jpg)
+- hello
+![](images/duck.jpg)
 # 或者插入 code
 # 用最有震撼力的方式\\展示你的 code
 - Show your code in the most shocking way
