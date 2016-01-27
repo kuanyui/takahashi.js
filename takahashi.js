@@ -199,7 +199,7 @@ onload = function() {
 
     function resizeAllImages(){
         var i;
-        // .fullscreen-image
+        /* .fullscreen-image */
         var fullscreenImages = document.getElementsByClassName("fullscreen-image");
         if (fullscreenImages.length != 0) {
             for (i=0; i<fullscreenImages.length; i++) {
@@ -207,7 +207,7 @@ onload = function() {
                 fullscreenImages[i].style.width = "auto";
             }
         }
-        // .image-and-title
+        /* .image-and-title */
         var images = document.getElementsByClassName("image-and-title");
         if (images.length != 0) {
             for (i=0; i<images.length; i++){
@@ -220,8 +220,9 @@ onload = function() {
                 style.margin = "0 auto";
                 var parent = images[i].parentNode;
                 var h1 = parent.getElementsByTagName("h1")[0];
-                console.log(h1);
                 h1.style.top = "-150px"; // [FIXME] magic code
+
+                /* Check if <h2> exist */
                 var h2 = parent.getElementsByTagName("h2");
                 if (h2.length != 0) {
                     h1.style.top = "-100px"; // [FIXME] magic code
