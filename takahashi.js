@@ -250,6 +250,10 @@ onload = function() {
         
         show(0, currentPageNumber);
         resizeAllImages();
+        var codeblocks = document.getElementsByTagName("pre");
+        for (var i=0; i<codeblocks.length; i++) {
+            hljs.highlightBlock(codeblocks[i]);
+        }
     }
 
     main();
