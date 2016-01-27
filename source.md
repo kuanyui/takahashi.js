@@ -15,40 +15,63 @@
 # 好東西
 - Good!
 # 寶傑我跟你說...
+- LBJ, do you know...
 # 高橋流簡報...
+- Takahashi Method...
 # 讚!
+- Awesome!
 # 地球只有一個
+- We have only one earth
 # 可是高橋流簡報
+- But with Takahashi Method
 # 卻可以一小時寫出好幾個
+- We can make not only one slide file in one hour
 # 簡報也是有很多種
+- There're various kinds of slide
 # 有的字又小又多\\搞到你完全不想看
+- Some has a lot of small text,\\ which makes you insane
 # 有的根本是在念稿\\棒讀到讓你想睡覺
+- Some people just like oral reading,\\ which makes you sleepy
 # 重點是\\當有各種簡報讓你選擇時
+- （靠北懶得翻譯了...）
 # 高橋，\\我選擇你的簡報
+- +Takahashi, I want you+
 # 高橋流簡報
+- Takahashi Method
 # 讚！
-- Awesome
+- Awesome!
 # 所以
 - So
 # takahashi.js
 - +Everybody loves JS+
 # 用 Markdown\\以**最高速率**做簡報
+- Making slides with the fucking highest efficiency \\(in Markdown syntax)
+# （呃，應該說是 Markdown 的子集）
+- (More preciously, a subset of Markdown)
 # 以**純 JS**實現
+- Implement with **pure & native JS**
 # 不用編譯\\即時輸出
+- No compile, export real-time
 # **不**綁任何編輯器
+- No require any editor
 # **不**綁任何平台
-# **不**含類固醇
-# **不**傷肝
-# **不**傷腎
+- No require any platform
 # **不**傷身體
+- Harmless to body
+# **不**含類固醇
+- Not contains steroid
 # 只要有瀏覽器就可以用
-# **讚**
+- What only need is a (moderm) web browser
+# 讚！
+- Awesome!
 # 可以用\\**全螢幕圖片**
+- **Fullscreen image** is ok
 # ![](images/duck.jpg)
 # 也可以有**文字**跟**圖片**
-- hello
+- ...Or image with titles
 ![](images/duck.jpg)
 # 或者插入 code
+- Code block is also acceptable
 # 用最有震撼力的方式\\展示你的 code
 - Show your code in the most shocking way
 ```lisp
@@ -60,11 +83,11 @@
 ```js
 var shit = this;
 ```
-# 讚
+# 讚！
 - Awesome
 # 哪裡取得
 - Where to get
 # GitHub
 # kuanyui/takahashi.js
-# 謝謝\\大家
+# 謝謝大家
 - Thank you
