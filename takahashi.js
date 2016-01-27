@@ -208,27 +208,27 @@ onload = function() {
             }
         }
         /* .image-and-title */
-        var images = document.getElementsByClassName("image-and-title");
+        var images = document.querySelectorAll("img.image-and-title");
+        
         if (images.length != 0) {
             for (i=0; i<images.length; i++){
                 var image = images[i];
                 image.style.height = (window.innerHeight * 0.7) + "px";
                 image.style.position = "absolute";
-                image.style.bottom = "0px";
+                image.style.bottom = "30px";
                 image.style.left = "0px"; 
                 image.style.right = "0px"; 
                 image.style.margin = "0 auto";
-                var parent = images[i].parentNode;
-                var h1 = parent.getElementsByTagName("h1")[0];
-                h1.style.top = "-150px"; // [FIXME] magic code
-
+                var h1 = image.parentNode.getElementsByTagName("h1")[0];
+                h1.style.top = "150px"; // [FIXME] magic code
+                console.log(image);
                 /* Check if <h2> exist */
-                var h2 = parent.getElementsByTagName("h2");
+                var h2 = image.parentNode.getElementsByTagName("h2");
                 if (h2.length != 0) {
-                    h1.style.top = "-100px"; // [FIXME] magic code
+                    h1.style.top = "180px"; // [FIXME] magic code
                     h2 = h2[0];
                     h2.style.position = "absolute";
-                    h2.style.top = "-320px"; // [FIXME] magic code
+                    h2.style.top = "-50px"; // [FIXME] magic code
                     h2.style.left = 0;
                     h2.style.right = 0;
                 }
