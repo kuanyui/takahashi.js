@@ -159,6 +159,7 @@ onload = function() {
                               lines.map(
                                   function(x){
                                       var text = x.replace(/<.+?>/g, "");
+                                      text = x.replace(/[\x00-\x7F]{2}/g, "x"); //ascii
                                       return text.length;}));
     }
     
