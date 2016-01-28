@@ -16,8 +16,8 @@ The parser of =Takahashi.js= accepts a Markdown-like syntax:
 
 - =# This is Title= : Only one level title is accepted. Don't forget add a space after =#= .
 - =- This is subtitle= : placed under title.
-- =# ![](path/to/image.jpg)= : Title + image
-- =![](path/to/image.jpg)= : Image.
+- =# ![](path/to/image.jpg)= : Fullscreen image
+- =![](path/to/image.jpg)= : Image + Title (+ Subtitle)
 - =\\= : A new line.
 - =*italic*=
 - =**colored emphasis**=
