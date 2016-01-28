@@ -183,7 +183,7 @@ onload = function() {
         var style = $ele.style;
         var top;
         var left;
-        var size = ((window.innerWidth / getHtmlStringMaxLineLength($ele.innerHTML)) * 0.8);
+        var size = ((window.innerWidth / getHtmlStringMaxLineLength($ele.innerHTML)) * 0.76);
         style.position = "absolute";
         style.display = "block";
         style.fontSize = size + "px";
@@ -226,10 +226,11 @@ onload = function() {
                 /* Check if <h2> exist */
                 var h2 = image.parentNode.getElementsByTagName("h2");
                 if (h2.length != 0) {
-                    h1.style.top = "180px"; // [FIXME] magic code
+                    h1.style.top = "18%"; // [FIXME] magic code
+                    h1.style.fontSize = (window.innerHeight * 0.12) +"px";
                     h2 = h2[0];
                     h2.style.position = "absolute";
-                    h2.style.top = "-50px"; // [FIXME] magic code
+                    h2.style.top = "-5%"; // [FIXME] magic code
                     h2.style.left = 0;
                     h2.style.right = 0;
                 }
