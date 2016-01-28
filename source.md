@@ -1,7 +1,19 @@
 # 高橋流簡報
 - Takahashi Method
 # 發明者
-# 日本 Ruby 開發者\\高橋征義
+- Inventor
+# 日本 Ruby 開發者\\**高橋**征義
+- Japanese Ruby developer\\**Takahashi**  Masayoshi
+# 簡單來說
+- In short,
+# 高橋流簡報就是
+- Takahashi Method is
+# 超大字體
+- Ultimate large font size
+# 搭配\\精簡文字
+- With simplified words
+# 所構成的簡報
+- That is!
 # 有些人說\\這是偷懶
 - Somebody says "You're too lazy!"
 # 然而我認為高橋流簡報
