@@ -1,7 +1,7 @@
 * Takahashi.js
 This is a [[https://en.wikipedia.org/wiki/Takahashi_method][Takahashi-style]] (Japanese: [[https://ja.wikipedia.org/wiki/高橋メソッド][高橋メソッド]]) slides generator written in pure native JavaScript, which let you use Markdown-like syntax to make slides.
 
-Please see [[https://kuanyui.github.io/demo/takahashi-js.html][DEMO]].
+Please see [[https://kuanyui.github.io/demo/takahashi.js/slide.html][DEMO]]
 
 * Requirement
 - A modern HTML5 compatible web browser.
