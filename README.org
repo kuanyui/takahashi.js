@@ -1,0 +1,23 @@
+* Takahashi.js
+This is a [[https://en.wikipedia.org/wiki/Takahashi_method][Takahashi-style]] (Japanese: [[https://ja.wikipedia.org/wiki/高橋メソッド][高橋メソッド]]) slides generator written in pure native JavaScript, which let you use Markdown-like syntax to make slides.
+
+* Requirement
+- A modern HTML5 compatible web browser.
+
+* Usage
+1. download/clone this repo.
+2. Edit =source.md=
+3. If need any style customization, please free free to edit =slides.html= by your self.
+
+* Available Markdown Syntax
+The parser of =Takahashi.js= accepts a Markdown-like syntax:
+
+- =# This is Title= : Only one level title is accepted. Don't forget add a space after =#= .
+- =- This is subtitle= : placed under title.
+- =# ![](path/to/image.jpg)= : Title + image
+- =![](path/to/image.jpg)= : Image.
+- =\\= : A new line.
+- =*italic*=
+- =**colored emphasis**=
+- =+striked+= : this syntax is inspired by Org-mode.
+- =```lisp= : The same as Github-flavored Markdown -- code block with syntax highlight. 

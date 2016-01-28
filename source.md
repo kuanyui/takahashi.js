@@ -75,8 +75,9 @@
 # 用最有震撼力的方式\\展示你的 code
 - Show your code in the most shocking way
 ```lisp
-(hello)
-(message "高橋流好棒棒")
+(defun hello-world ()
+  (interactive)
+  (message "高橋流好棒棒"))
 ```
 # 也適合拿來酸\\你討厭的程式語言
 - Also suitable for blame a terrible language you hate
