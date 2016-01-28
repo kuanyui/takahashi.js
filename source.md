@@ -66,10 +66,12 @@
 - Awesome!
 # 可以用\\**全螢幕圖片**
 - **Fullscreen image** is ok
-# ![](images/duck.jpg)
+# ![](https://farm5.staticflickr.com/4070/4318432006_8353d986ab_b.jpg)
+
 # 也可以有**文字**跟**圖片**
 - ...Or image with titles
-![](images/duck.jpg)
+![](https://farm7.staticflickr.com/6202/6049737840_e366c03b4f_b.jpg)
+
 # 或者插入 code
 - Code block is also acceptable
 # 用最有震撼力的方式\\展示你的 code

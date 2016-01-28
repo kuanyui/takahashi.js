@@ -5,7 +5,7 @@ This is a [[https://en.wikipedia.org/wiki/Takahashi_method][Takahashi-style]] (J
 - A modern HTML5 compatible web browser.
 
 * Usage
-1. download/clone this repo.
+1. download/clone this repository.
 2. Edit =source.md=
 3. If need any style customization, please free free to edit =slides.html= by your self.
 
@@ -21,3 +21,6 @@ The parser of =Takahashi.js= accepts a Markdown-like syntax:
 - =**colored emphasis**=
 - =+striked+= : this syntax is inspired by Org-mode.
 - =```lisp= : The same as Github-flavored Markdown -- code block with syntax highlight. 
+
+* License
+MIT
