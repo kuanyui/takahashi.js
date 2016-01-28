@@ -13,7 +13,7 @@ onload = function() {
     // Variables
     //======================================================
     
-    var markdownFile = 'source.md';
+    var markdownFile = markdownFile || 'source.md';
     
     //======================================================
     // Parser
