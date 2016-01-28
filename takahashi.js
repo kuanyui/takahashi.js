@@ -157,10 +157,10 @@ onload = function() {
         var lines = HTMLString.split("<br>");
         return Math.max.apply({},
                               lines.map(
-                                  function(x){
-                                      var text = x.replace(/<.+?>/g, "");
-                                      text = x.replace(/[\x00-\x7F]{2}/g, "x"); //ascii
-                                      return text.length;}));
+                                  function(line){
+                                      line = line.replace(/<.+?>/g, "");
+                                      line = line.replace(/[\x00-\x7F]{2}/g, "x"); //ascii
+                                      return line.length;}));
     }
     
     document.onkeydown = function(e) {
@@ -243,9 +243,11 @@ onload = function() {
 
     function getTextMaxLineLength (text) {
         var lines = text.split("\n");
-        return Math.max.apply({},
-                       lines.map(
-                           function(x){return text.length;}));
+        return Math.max.apply(null,
+                              lines.map(function(line){
+                                  line = line.replace(/[\u4e00-\u9faf\u3000-\u30ff\uff00-\uff60\uffe0-\uffe6]/g, "AA");
+                                  return line.length;
+                              }));
     }
     
     function main(){
