@@ -7,13 +7,17 @@
 # 簡單來說
 - In short,
 # 高橋流簡報就是
-- Takahashi Method is
+- Takahashi Method is a slide with
 # 超大字體
 - Ultimate large font size
 # 搭配\\精簡文字
 - With simplified words
 # 所構成的簡報
 - That is!
+# 講者才是一切
+- Speaker is everything
+# 觀眾\\不會分心
+- User won't be distracted
 # 有些人說\\這是偷懶
 - Somebody says "You're too lazy!"
 # 然而我認為高橋流簡報
