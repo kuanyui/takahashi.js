@@ -139,7 +139,7 @@ onload = function() {
             var $h1 = $slide.getElementsByTagName("h1")[0];
             if ($h1) {fitH1($h1);}
             var $h2 = $slide.getElementsByTagName("h2")[0];
-            if ($h2) {$h2.style.fontSize = "4em";};
+            if ($h2) {fitH2($h2);}
             $slides.appendChild($slide);
             fitSlide($slide);
         }
@@ -151,6 +151,12 @@ onload = function() {
         document.getElementById(to).style.display = "block";
         currentPageNumber = to;
         location.hash = to;
+        // Shit not work:
+        //while ($ele.offsetHeight > window.innerHeight){
+        //    size = size * 0.95 ;
+        //    style.fontSize = size + "px";
+        //}
+
     }
 
     function getHtmlStringMaxLineLength(HTMLString){
@@ -176,33 +182,46 @@ onload = function() {
             show(currentPageNumber, to);
         }
     }
+    function getMinMargin() {
+        return Math.min(window.innerHeight, window.innerWidth);
+    }
+    function getMaxMargin() {
+        return getMinMargin() * (4/3);
+    }
 
     function fitSlide($slide){
         var style = $slide.style;
-        var height = document.body.clientHeight + "px";
-        var width  = document.body.clientWidth + "px";
+        var min = getMinMargin();
+        var width = min * 4/3 + "px";
+        var height = min + "px";
         style.height = height;
         style.width = width;
+        style.position = "absolute";
+        style.margin = 'auto'; // center abs
+        style.left = 0;        // center abs
+        style.right = 0;       // center abs
+
         style.display = "none";
     }
 
+    function fitH2($h2){
+        var size = ((getMinMargin() / getHtmlStringMaxLineLength($h2.innerHTML)) * 0.9);
+        $h2.style.margin = 0;
+        $h2.style.top = "10px";
+        $h2.style.fontSize = Math.min(60, size) + "px";
+    }
     function fitH1($ele){
         var style = $ele.style;
         var top;
         var left;
-        var size = ((window.innerWidth / getHtmlStringMaxLineLength($ele.innerHTML)) * 0.76);
-        style.position = "absolute";
+        var size = ((getMinMargin() / getHtmlStringMaxLineLength($ele.innerHTML)) * 1.1);
         style.display = "block";
+        style.position = "absolute";
+        style.margin = "auto";
+        style.top = "20%";
+        style.left = 0;
+        style.right = 0;
         style.fontSize = size + "px";
-        style.left = "50%";
-        style.top = "55%";
-        style.transform = "translate(-50%, -50%)";
-        style.margin = "0px";
-        // Shit not work:
-        while ($ele.offsetHeight > window.innerHeight){
-            size = size * 0.95 ;
-            style.fontSize = size + "px";
-        }
     }
 
     function resizeAllImages(){
@@ -224,22 +243,18 @@ onload = function() {
                 image.style.height = (window.innerHeight * 0.7) + "px";
                 image.style.position = "absolute";
                 image.style.bottom = "30px";
-                image.style.left = "0px";
-                image.style.right = "0px";
-                image.style.margin = "0 auto";
+                image.style.margin = "auto";
+                image.style.left = 0;
+                image.style.right = 0;
                 var h1 = image.parentNode.getElementsByTagName("h1")[0];
-                h1.style.top = "150px"; // [FIXME] magic code
                 console.log(image);
                 /* Check if <h2> exist */
                 var h2 = image.parentNode.getElementsByTagName("h2");
                 if (h2.length != 0) {
-                    h1.style.top = "18%"; // [FIXME] magic code
-                    h1.style.fontSize = (window.innerHeight * 0.12) +"px";
+                    h1.style.top = "48px";
+                    h1.style.fontSize = (getMinMargin() * 0.12) +"px";
                     h2 = h2[0];
-                    h2.style.position = "absolute";
-                    h2.style.top = "-5%"; // [FIXME] magic code
-                    h2.style.left = 0;
-                    h2.style.right = 0;
+
                 }
             }
         }
@@ -271,7 +286,7 @@ onload = function() {
         var codeblocks = document.getElementsByTagName("pre");
         for (var i=0; i<codeblocks.length; i++) {
             var block = codeblocks[i];
-            var size = ((window.innerWidth / getTextMaxLineLength(block.textContent)) * 1.8);
+            var size = ((getMinMargin() / getTextMaxLineLength(block.textContent)) * 1.8);
             block.style.fontSize = size + "px";
             block.style.top = "0px";
             block.style.bottom = "0px";
