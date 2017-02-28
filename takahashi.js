@@ -145,18 +145,74 @@ onload = function() {
         }
     }
 
-    function show(from, to){
+    function switchSlide(from, to){
         // FROM page N TO page N
         document.getElementById(from).style.display = "none";
         document.getElementById(to).style.display = "block";
+        document.getElementById(to).style.opacity = 0;
         currentPageNumber = to;
         location.hash = to;
-        // Shit not work:
-        //while ($ele.offsetHeight > window.innerHeight){
-        //    size = size * 0.95 ;
-        //    style.fontSize = size + "px";
-        //}
+        render(to)
+    }
+    function render (pageN) {
+        var $slide = document.getElementById(pageN);
+        var _h1 = $slide.getElementsByTagName("h1")
+        var $h1 = _h1 ? _h1[0] : null;
+        var _h2 = $slide.getElementsByTagName("h2")
+        var $h2 = _h2 ? _h2[0] : null;
+        var _img = $slide.getElementsByTagName("img")
+        var $img = _img ? _img[0] : null
+        var _block = $slide.getElementsByTagName("pre")
+        var $block = _block ? _block[0] : null;
+        if ($h2) {
+            var h2size = parseInt($h2.style.fontSize.substring(0, $h2.style.fontSize.length-2))
+            console.log("h2 width", $h2.offsetWidth, "MAX:", getSlideWidth())
+            while ($h2.offsetHeight > getSlideHeight()) {
+                h2size *= 0.95;
+                $h2.style.fontSize = h2size + "px";
+            }
+            while ($h2.offsetWidth > getSlideWidth()) {
+                h2size *= 0.95;
+                $h2.style.fontSize = h2size + "px";
+            }
+        }
+        if ($h1) {
+            var h1Size = parseInt($h1.style.fontSize.substring(0, $h1.style.fontSize.length-2))
+            console.log("h1 width", $h1.offsetWidth, "MAX:", getSlideWidth())
+            while ($h1.offsetHeight > getSlideHeight()) {
+                h1Size *= 0.95;
+                $h1.style.fontSize = h1Size + "px";
+            }
+            while ($h1.offsetWidth > getSlideWidth()) {
+                h1Size *= 0.95;
+                $h1.style.fontSize = h1Size + "px";
+            }
+            if ($h2) {
+                if ($img) {
+                    $h2.style.top = "10px"
+                    $h1.style.top = $h2.offsetTop + $h2.offsetHeight + "px"
 
+                } else {
+                    console.log("----> ", ($h2.offsetTop + $h2.offsetHeight) + $h1.offsetHeight, getSlideHeight())
+                    if (($h2.offsetTop + $h2.offsetHeight) + $h1.offsetHeight > getSlideHeight()) {
+                        $h1.style.top = ($h2.offsetTop + $h2.offsetHeight) + "px"
+                        while (($h2.offsetTop + $h2.offsetHeight) + $h1.offsetHeight > getSlideHeight()) {
+                            h1Size *= 0.95;
+                            $h1.style.fontSize = h1Size + "px";
+                        }
+                    } else {
+                        $h1.style.top = ($h2.offsetTop + $h2.offsetHeight) + (((getSlideHeight() - ($h2.offsetTop + $h2.offsetHeight)) - $h1.offsetHeight) / 2 ) + "px"
+                        console.log($h1.style.top)
+                    }
+                }
+            } else {
+                $h1.style.top = ((getSlideHeight() - $h1.offsetHeight) / 2) + "px"
+            }
+        }
+        if ($block) {
+            $block.style.top = ((getSlideHeight() - $block.offsetHeight) / 2) + "px"
+        }
+        document.getElementById(pageN).style.opacity = 1;
     }
 
     function getHtmlStringMaxLineLength(HTMLString){
@@ -172,52 +228,56 @@ onload = function() {
     document.onkeydown = function(e) {
         var to = currentPageNumber + {39: 1, 37: -1}[e.which];
         if (to in availablePageNumbers) {
-            show(currentPageNumber, to);
+            switchSlide(currentPageNumber, to);
         }
     };
     document.ontouchstart = function(e) {
       if (e.target.href) { return }
         var to = currentPageNumber + (e.touches[0].pageX > innerWidth / 2 ? 1 : -1);
         if (to in availablePageNumbers) {
-            show(currentPageNumber, to);
+            switchSlide(currentPageNumber, to);
         }
     }
-    function getMinMargin() {
+    function getSlideHeight() {
         return Math.min(window.innerHeight, window.innerWidth);
     }
-    function getMaxMargin() {
-        return getMinMargin() * (4/3);
+    function getSlideWidth() {
+        return getSlideHeight() * (4/3);
     }
 
     function fitSlide($slide){
         var style = $slide.style;
-        var min = getMinMargin();
+        var min = getSlideHeight();
         var width = min * 4/3 + "px";
         var height = min + "px";
         style.height = height;
         style.width = width;
         style.position = "absolute";
-        style.margin = 'auto'; // center abs
+        style.margin = '0 auto'; // center abs
         style.left = 0;        // center abs
         style.right = 0;       // center abs
-
+        style.overflow = 'hidden';
         style.display = "none";
     }
 
     function fitH2($h2){
-        var size = ((getMinMargin() / getHtmlStringMaxLineLength($h2.innerHTML)) * 0.9);
-        $h2.style.margin = 0;
-        $h2.style.top = "10px";
+        var size = ((getSlideHeight() / getHtmlStringMaxLineLength($h2.innerHTML)) * 1.5);
+        $h2.style.display = "table";
+        $h2.style.position = "absolute"
+        $h2.style.margin = 'auto';
+        $h2.style.left = 0;
+        $h2.style.right = 0;
+        $h2.style.top = "20px";
         $h2.style.fontSize = Math.min(60, size) + "px";
     }
     function fitH1($ele){
         var style = $ele.style;
         var top;
         var left;
-        var size = ((getMinMargin() / getHtmlStringMaxLineLength($ele.innerHTML)) * 1.1);
-        style.display = "block";
+        var size = ((getSlideHeight() / getHtmlStringMaxLineLength($ele.innerHTML)) * 1.5);
+        style.display = "table";
         style.position = "absolute";
-        style.margin = "auto";
+        style.margin = "0 auto"
         style.top = "20%";
         style.left = 0;
         style.right = 0;
@@ -242,8 +302,8 @@ onload = function() {
                 var image = images[i];
                 image.style.height = (window.innerHeight * 0.7) + "px";
                 image.style.position = "absolute";
-                image.style.bottom = "30px";
                 image.style.margin = "auto";
+                image.style.bottom = 0;
                 image.style.left = 0;
                 image.style.right = 0;
                 var h1 = image.parentNode.getElementsByTagName("h1")[0];
@@ -252,7 +312,7 @@ onload = function() {
                 var h2 = image.parentNode.getElementsByTagName("h2");
                 if (h2.length != 0) {
                     h1.style.top = "48px";
-                    h1.style.fontSize = (getMinMargin() * 0.12) +"px";
+                    h1.style.fontSize = (getSlideHeight() * 0.12) +"px";
                     h2 = h2[0];
 
                 }
@@ -281,17 +341,19 @@ onload = function() {
             currentPageNumber = 0;
         };
 
-        show(0, currentPageNumber);
         resizeAllImages();
         var codeblocks = document.getElementsByTagName("pre");
         for (var i=0; i<codeblocks.length; i++) {
             var block = codeblocks[i];
-            var size = ((getMinMargin() / getTextMaxLineLength(block.textContent)) * 1.8);
+            var size = ((getSlideHeight() / getTextMaxLineLength(block.textContent)) * 1.8);
             block.style.fontSize = size + "px";
+            block.style.position = 'absolute';
+            block.style.width = getSlideWidth() + "px"
             block.style.top = "0px";
-            block.style.bottom = "0px";
             hljs.highlightBlock(block);
         }
+
+        switchSlide(0, currentPageNumber);
     }
 
     main();

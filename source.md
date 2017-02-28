@@ -49,7 +49,7 @@
 # 有的根本是在念稿\\棒讀到讓你想睡覺
 - Some people just like oral reading,\\ which makes you sleepy
 # 重點是\\當有各種簡報讓你選擇時
-- （靠北懶得翻譯了...）
+- (Too lazy to translate...)
 # 高橋，\\我選擇你的簡報
 - +Takahashi, I want you+
 # 高橋流簡報
@@ -61,7 +61,7 @@
 # takahashi.js
 - +Everybody loves JS+
 # 用 Markdown\\以**最高速率**做簡報
-- Making slides with the fucking highest efficiency \\(in Markdown syntax)
+- Making slides with superb high efficiency \\(in Markdown syntax)
 # （呃，應該說是 Markdown 的子集）
 - (More preciously, a subset of Markdown)
 # 以**純 JS**實現
@@ -76,8 +76,8 @@
 - Harmless to body
 # **不**含類固醇
 - Not contains steroid
-# 只要有瀏覽器就可以用
-- What only need is a (moderm) web browser
+# 只要有瀏覽器\\就可以用
+- All you needed is a (moderm) web browser
 # 讚！
 - Awesome!
 # 可以用\\**全螢幕圖片**
@@ -97,8 +97,8 @@
   (interactive)
   (message "高橋流好棒棒"))
 ```
-# 也適合拿來酸\\你討厭的程式語言
-- Also suitable for blame a terrible language you hate
+# ...也適合拿來酸\\你討厭的程式語言
+- ...also suitable for blame a terrible language you hate
 ```js
 var shit = this;
 ```
