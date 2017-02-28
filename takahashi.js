@@ -1,4 +1,4 @@
-/* 
+/*
  takahashi.js
  Created: [2016-01-20 水 19:46]
  Author: ono hiroko
@@ -12,13 +12,13 @@ onload = function() {
     //======================================================
     // Variables
     //======================================================
-    
+
     var markdownFile = markdownFile || 'source.md';
-    
+
     //======================================================
     // Parser
     //======================================================
-    
+
     function Parser(markdownFileUrl) {
         this.markdownFileUrl = markdownFileUrl;
         this.parsed = this.parse(markdownFileUrl);
@@ -39,7 +39,7 @@ onload = function() {
 
     Parser.prototype.readLines = function(){
         var rawString = this.getMarkdownFileContentAsString();
-        return rawString.split("\n");    
+        return rawString.split("\n");
     };
 
     Parser.prototype.parse = function(){
@@ -52,7 +52,7 @@ onload = function() {
     Parser.prototype.__parse = function(lines, parsed){
         parsed = parsed || [];
         var imagePattern = /!\[\]\((.+?)\)/;
-        
+
         if (lines.length == 0) {
             return parsed;
         } else if (lines[0] == ""){
@@ -65,7 +65,7 @@ onload = function() {
             var imgUrl = lines[0].match(imagePattern)[1];
             parsed[(parsed.length - 1)]['type'] = "image-and-title";
             parsed[(parsed.length - 1)]['imgUrl'] = imgUrl;
-            return this.__parse(lines.slice(1), parsed);            
+            return this.__parse(lines.slice(1), parsed);
         } else if (lines[0].substring(0, 2) == "# ") { // Title
             var title = this.processEmphasisMarks(lines[0].substring(2));
             parsed.push({"type": "normal", "title": title});
@@ -94,7 +94,7 @@ onload = function() {
             return this.processCodeBlock(lines.slice(1), parsed);
         };
     };
-    
+
     Parser.prototype.processEmphasisMarks = function(string) {
         var italic = /\*(.+?)\*/g;
         var bold   = /\*\*(.+?)\*\*/g;
@@ -106,7 +106,7 @@ onload = function() {
         return output.replace(newline, "<br/>");
     };
 
-    
+
     //======================================================
     // Slide
     //======================================================
@@ -114,7 +114,7 @@ onload = function() {
 
     var availablePageNumbers = [];
     var currentPageNumber = 0;
-    
+
     function generateSlides() {
         var $slides = document.getElementsByTagName("slides")[0];
         var parser = new Parser(markdownFile);
@@ -152,7 +152,7 @@ onload = function() {
         currentPageNumber = to;
         location.hash = to;
     }
-    
+
     function getHtmlStringMaxLineLength(HTMLString){
         var lines = HTMLString.split("<br>");
         return Math.max.apply({},
@@ -162,14 +162,21 @@ onload = function() {
                                       line = line.replace(/[\x00-\x7F]{2}/g, "x"); //ascii
                                       return line.length;}));
     }
-    
+
     document.onkeydown = function(e) {
         var to = currentPageNumber + {39: 1, 37: -1}[e.which];
         if (to in availablePageNumbers) {
             show(currentPageNumber, to);
         }
     };
-    
+    document.ontouchstart = function(e) {
+      if (e.target.href) { return }
+        var to = currentPageNumber + (e.touches[0].pageX > innerWidth / 2 ? 1 : -1);
+        if (to in availablePageNumbers) {
+            show(currentPageNumber, to);
+        }
+    }
+
     function fitSlide($slide){
         var style = $slide.style;
         var height = document.body.clientHeight + "px";
@@ -178,7 +185,7 @@ onload = function() {
         style.width = width;
         style.display = "none";
     }
-    
+
     function fitH1($ele){
         var style = $ele.style;
         var top;
@@ -210,15 +217,15 @@ onload = function() {
         }
         /* .image-and-title */
         var images = document.querySelectorAll("img.image-and-title");
-        
+
         if (images.length != 0) {
             for (i=0; i<images.length; i++){
                 var image = images[i];
                 image.style.height = (window.innerHeight * 0.7) + "px";
                 image.style.position = "absolute";
                 image.style.bottom = "30px";
-                image.style.left = "0px"; 
-                image.style.right = "0px"; 
+                image.style.left = "0px";
+                image.style.right = "0px";
                 image.style.margin = "0 auto";
                 var h1 = image.parentNode.getElementsByTagName("h1")[0];
                 h1.style.top = "150px"; // [FIXME] magic code
@@ -237,7 +244,7 @@ onload = function() {
             }
         }
     }
-    
+
     //======================================================
     // Main
     //======================================================
@@ -250,7 +257,7 @@ onload = function() {
                                   return line.length;
                               }));
     }
-    
+
     function main(){
         generateSlides();
         if (location.hash != "") {
@@ -258,7 +265,7 @@ onload = function() {
         } else {
             currentPageNumber = 0;
         };
-        
+
         show(0, currentPageNumber);
         resizeAllImages();
         var codeblocks = document.getElementsByTagName("pre");
@@ -274,5 +281,3 @@ onload = function() {
 
     main();
 };
-
-
