@@ -20,7 +20,7 @@
 - User won't be distracted
 # 有些人說\\這是偷懶
 - Somebody says "You're too lazy!"
-# 然而我認為高橋流簡報
+# 然而我認為\\高橋流簡報
 - But I think **takahashi method** is
 # 簡單
 - Easy to make
@@ -38,9 +38,9 @@
 - Awesome!
 # 地球只有一個
 - We have only one earth
-# 可是高橋流簡報
+# 可是\\高橋流簡報
 - But with Takahashi Method
-# 卻可以一小時寫出好幾個
+# 卻可以一小時\\寫出好幾個
 - We can make not only one slide file in one hour
 # 簡報也是有很多種
 - There're various kinds of slide
@@ -51,7 +51,7 @@
 # 重點是\\當有各種簡報讓你選擇時
 - (Too lazy to translate...)
 # 高橋，\\我選擇你的簡報
-- +Takahashi, I want you+
+- +Takahashi, I like you+
 # 高橋流簡報
 - Takahashi Method
 # 讚！
@@ -64,9 +64,11 @@
 - Making slides with superb high efficiency \\(in Markdown syntax)
 # （呃，應該說是 Markdown 的子集）
 - (More preciously, a subset of Markdown)
-# 以**純 JS**實現
-- Implement with **pure & native JS**
-# 不用編譯\\即時輸出
+# 以**純 JS **實現
+- Implement with **Vanilla JS**
+# **不需要**任何 \\ JS Framework
+- Without any JS framework
+# **不用**編譯\\即時輸出
 - No compile, export real-time
 # **不**綁任何編輯器
 - No require any editor
@@ -76,7 +78,7 @@
 - Harmless to body
 # **不**含類固醇
 - Not contains steroid
-# 只要有瀏覽器\\就可以用
+# 只要瀏覽器
 - All you needed is a (moderm) web browser
 # 讚！
 - Awesome!
