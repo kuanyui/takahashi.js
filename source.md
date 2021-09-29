@@ -84,11 +84,11 @@
 - Awesome!
 # 可以用\\**全螢幕圖片**
 - **Fullscreen image** is ok
-# ![](https://farm5.staticflickr.com/4070/4318432006_8353d986ab_b.jpg)
+# ![](https://raw.githubusercontent.com/kuanyui/moe-theme.el/master/pics/moe-theme.png)
 
 # 也可以有**文字**跟**圖片**
 - ...Or image with titles
-![](https://farm7.staticflickr.com/6202/6049737840_e366c03b4f_b.jpg)
+![](https://raw.githubusercontent.com/kuanyui/moe-theme.el/master/pics/moe-theme.png)
 
 # 或者插入 code
 - Code block is also acceptable
