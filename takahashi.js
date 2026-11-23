@@ -212,6 +212,22 @@ onload = function() {
         if ($block) {
             $block.style.top = ((getSlideHeight() - $block.offsetHeight) / 2) + "px"
         }
+        if ($img) {
+          var h = window.innerHeight;
+          var w = window.innerWidth;
+          if ($h2) {
+            h -= 86;
+            $img.style.top = "86px";
+          }
+          if (w/$img.clientWidth < h/$img.clientHeight) {
+            $img.style.width = w + "px";
+            $img.style.height = "auto"
+          }
+          else {
+            $img.style.height = h + "px";
+            $img.style.width = "auto";
+          }
+        }
         document.getElementById(pageN).style.opacity = 1;
     }
 
@@ -290,8 +306,18 @@ onload = function() {
         var fullscreenImages = document.getElementsByClassName("fullscreen-image");
         if (fullscreenImages.length != 0) {
             for (i=0; i<fullscreenImages.length; i++) {
+              if (fullscreenImages[i].tagName.toUpperCase()=="IMG") {
+                fullscreenImages[i].style.position = "absolute";
+                fullscreenImages[i].style.margin = "auto";
+                fullscreenImages[i].style.top = "0";
+                fullscreenImages[i].style.bottom = "0";
+                fullscreenImages[i].style.left = "0";
+                fullscreenImages[i].style.right = "0";
+              }
+              else {
                 fullscreenImages[i].style.height = window.innerHeight + "px";
                 fullscreenImages[i].style.width = "auto";
+              }
             }
         }
         /* .image-and-title */
